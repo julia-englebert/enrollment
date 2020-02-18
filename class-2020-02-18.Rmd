@@ -1,0 +1,23 @@
+---
+title: "class-2020-02-18"
+author: "Julia Englebert"
+date: "2/18/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(readxl)
+library(janitor)
+library(reprex)
+library(devtools)
+library(gt)
+```
+
+```{r}
+enroll <- read_xlsx("class_enrollment_summary_by_term2.18.20.xlsx", skip = 3) %>%
+  clean_names()
+```
+
+
