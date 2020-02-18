@@ -15,9 +15,38 @@ library(devtools)
 library(gt)
 ```
 
-```{r}
+```{r, include=FALSE}
+
 enroll <- read_xlsx("class_enrollment_summary_by_term2.18.20.xlsx", skip = 3) %>%
-  clean_names()
+  clean_names() %>%
+  filter(! is.na(course_name))
 ```
 
+```{r, include=FALSE}
+# Find the 5 departments with the highest total enrollment
+
+top_5_dept <- enroll %>%
+  group_by(course_department) %>%
+  summarize(dept_enroll = sum(total)) %>%
+  arrange(desc(dept_enroll)) %>%
+  slice(1:5)
+```
+
+
+```{r}
+
+# Find the biggest new(?) course for each department
+# You would have to look at old data to figure out which courses are new
+
+top_gened <- enroll %>%
+  filter(course_department == "General Education") %>%
+  arrange(desc(total)) %>%
+  slice(1) %>%
+  pull(course_name)
+
+```
+
+```{r}
+
+```
 

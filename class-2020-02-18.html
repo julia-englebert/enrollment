@@ -369,8 +369,14 @@ summary {
 </div>
 
 
-<pre class="r"><code>enroll &lt;- read_xlsx(&quot;class_enrollment_summary_by_term2.18.20.xlsx&quot;, skip = 3) %&gt;%
-  clean_names()</code></pre>
+<pre class="r"><code># Find the biggest new(?) course for each department
+# You would have to look at old data to figure out which courses are new
+
+top_gened &lt;- enroll %&gt;%
+  filter(course_department == &quot;General Education&quot;) %&gt;%
+  arrange(desc(total)) %&gt;%
+  slice(1) %&gt;%
+  pull(course_name)</code></pre>
 
 
 
